@@ -1,5 +1,6 @@
 #goal definition
-int32 distance
+float32 distance
+float32 initial_position
 ---
 #result definition
 int32[] result

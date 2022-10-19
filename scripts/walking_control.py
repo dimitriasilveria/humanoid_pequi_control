@@ -15,11 +15,9 @@ L = glob.getL()
 g = glob.getG()
 h = glob.getH()
 hEdo = glob.getHEDO()
-#global  m, L, g,  h, hEdo
+published_topic = rospy.get_param('~published_topic',default = 'arm/cmd_position')
 
-U0 = np.zeros((5,1))
-
-pub_theta = rospy.Publisher('arm/cmd_position',Int16MultiArray,queue_size=10)
+pub_theta = rospy.Publisher(published_topic,Int16MultiArray,queue_size=10)
 
 rate = rospy.Rate(50)
 #Darwin
@@ -30,10 +28,5 @@ rate = rospy.Rate(50)
 # i = 0
 while not rospy.is_shutdown():
     caminhada(pub_theta)
-    # angle.data = [int(vec[i]),int(vec[i])]
-    # i = i + 1
-    # print(vec[i])
-    # pub.publish(angle)
-    # if (i == np.size(vec)-1):
-    #     i = 0
+
     rate.sleep()

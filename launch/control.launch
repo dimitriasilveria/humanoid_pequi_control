@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<launch>    
+    <!-- <param name="gazebo"                   value="false"    type="bool"/>
+    <param name="gazebo_robot_name"        value="robotis_op3"/>
+    
+    <param name="offset_file_path"         value="$(find op3_tuning_module)/data/offset.yaml"/>
+    <param name="robot_file_path"          value="$(find op3_manager)/config/OP3.robot"/>
+    <param name="init_file_path"           value="$(find op3_manager)/config/dxl_init_OP3.yaml"/>
+    <param name="device_name"              value="/dev/ttyUSB0"/> -->
+    <node name="serial_node"        pkg="rosserial_python"      type="serial_node.py">
+    <param name="port"              type="string"               value="/dev/ttyACM0"/>
+    <param name="baud"              type="int"                  value="1000000"/>
+    </node>
+    <!-- Walking control-->
+    <node pkg="humanoid_pequi_control" type="walking_control.py" name="walking_module" output="screen">
+	</node>
+
+</launch>

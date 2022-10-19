@@ -11,8 +11,6 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  actionlib_msgs
-  actionlib
 )
 
 ## System dependencies are found with CMake's conventions
@@ -68,17 +66,16 @@ find_package(catkin REQUIRED COMPONENTS
 #   Action1.action
 #   Action2.action
 # )
-add_action_files(
-  DIRECTORY action
-  FILES Walking.action
-)
+# add_action_files(
+
+# )
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
 #   std_msgs
 # )
 generate_messages(
-  DEPENDENCIES actionlib_msgs std_msgs  # Or other packages containing msgs
+  DEPENDENCIES std_msgs  # Or other packages containing msgs
 )
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -112,7 +109,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES humanoid_pequi_control
-  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs 
 #  DEPENDS system_lib
 )
 
@@ -133,6 +130,39 @@ include_directories(
 # )
 catkin_install_python(PROGRAMS 
   scripts/walking_control.py
+  scripts/caminhada.py
+  scripts/CalculoMhd.py
+  scripts/dualHamiltonOp.py
+  scripts/dualQuatConj.py
+  scripts/dualQuatDH.py
+  scripts/dualQuatDot.py
+  scripts/dualQuatMult.py
+  scripts/fase1.py
+  scripts/fase2.py
+  scripts/fase3.py
+  scripts/getAngleQuaternion.py
+  scripts/getPositionDualQuat.py
+  scripts/getRotationDualQuat.py
+  scripts/globalVariables.py
+  scripts/HamiltonOp.py
+  scripts/jacobianoCoM.py
+  scripts/jacobianoF.py
+  scripts/jacobianoPes.py
+  scripts/kinematicModel.py
+  scripts/kinematicRobo.py
+  scripts/quatAdd.py
+  scripts/quatConj.py
+  scripts/quatMult.py
+  scripts/quatNorm.py
+  scripts/quatNormalize.py
+  scripts/quatRot.py
+  scripts/quatScale.py
+  scripts/quatSub.py
+  scripts/rungekuttaLIPM.py
+  scripts/trajetoria.py
+  scripts/trajetoriaPes.py
+  scripts/trajetoriaPesInicio.py
+  scripts/transformacao.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 ## Add cmake target dependencies of the library

@@ -7,7 +7,7 @@ from globalVariables import GlobalVariables
 from trajetoriaPesInicio import trajetoriaPesInicio
 import numpy as np
 import math
-import time
+
 #-----------------------------------------
 #Executar a caminhada
 #Parâmetros:

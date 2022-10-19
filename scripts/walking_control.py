@@ -23,30 +23,7 @@ pub_theta = rospy.Publisher('arm/cmd_position',Int16MultiArray,queue_size=10)
 
 rate = rospy.Rate(50)
 #Darwin
-xod  = 0.0
-yod  = glob.L1
-zod  = 0.25
-dxod = 0.0
-dyod = -0.1325
-dzod = 0.0
 
-#Ganhos LQR (perna direita) e proporcional (perna esquerda)
-ganhoS1 = 0
-ganhoQ1 = 500
-ganhoR1 = 0.001
-ganhoK1 = 900
-#Ganhos LQR (perna esquerda) e proporcional (perna direita)
-ganhoS2 = 0
-ganhoQ2 = 500
-ganhoR2 = 0.001
-ganhoK2 = 900
-
-
-
-X01 = np.array([[xod],[yod],[zod],[dxod],[dyod],[dzod]]) #condição inicial
-
-vecGanho1 = np.array([ganhoS1, ganhoQ1, ganhoR1, ganhoK1]).reshape((4,1))
-vecGanho2 = np.array([ganhoS2, ganhoQ2, ganhoR2, ganhoK2]).reshape((4,1))
 # a = np.arange(-np.pi,np.pi,0.01)
 # vec = 600*np.sin(a)
 # print(np.size(a))

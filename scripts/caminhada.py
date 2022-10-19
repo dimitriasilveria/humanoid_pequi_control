@@ -171,7 +171,7 @@ def caminhada(pub_theta):
     [trajCoM2_2,vel2_2,ind_s2,ind_dbl2,X0] = trajetoria(X02_2)
     a = 2000
     b = 0
-    xd = 0.024
+    xd = 0.0155
     vd = 0.00
     vf = X0[1,0]
     xi3_2 = footPlacement(a,b,zod,vf,xd,vd)
@@ -180,8 +180,69 @@ def caminhada(pub_theta):
     tamTrajPa2_2 = np.array([ind_s2,ind_dbl2])
     trajPA2_2 = trajetoriaPes(np.array([[posInicialPe],[-passoLargura],[0]]),
     passoComprimentoA,passoAltura,altura_y,-passoLargura,0,tamTrajPa2_2)
+    # print(getPositionDualQuat(ha),'ha2 fase2 inicial')
     [ha,ha2,theta] = fase2(ha,ha2,trajCoM2_2,np.size(trajPA2_2,0),
     trajPA2_2,theta,vecGanho2,pub_theta)
+
+    # #####passo3_2#########################################################################
+    X03_2 = np.array([[-xi3_2],[passoLargura+X0[2,0]],[X0[4,0]],[X0[1,0]],[X0[3,0]],[X0[5,0]]])
+    [trajCoM3_2,vel3_2,ind_s3,ind_dbl3,X0] = trajetoria(X03_2)
+    a = 6.8
+    b = 0
+    xd = 0.014
+    vd = 0.0
+    # vf = X0[1,0]
+    xi2_3 = footPlacement(a,b,zod,vf,xd,vd)
+
+    posInicialPe = -passoComprimentoA - posInicialPe
+    passoComprimentoB = -posInicialPe + X0[0,0] + xi2_3 
+    tamTrajPb3_2 = np.array([ind_s3,ind_dbl3])
+    trajPB3_2 = trajetoriaPes(np.array([[posInicialPe],[passoLargura],[0]]),
+    passoComprimentoB,passoAltura,-altura_y,passoLargura,0,tamTrajPb3_1)
+    [ha,ha2,theta] = fase3(ha,ha2,trajCoM3_2,np.size(trajPB3_2,0),
+    trajPB3_2,theta,vecGanho1,pub_theta)
+
+    # ##################################################################################3
+    # #stopping
+    X02_3 = np.array([[(-xi2_3)],[-(passoLargura-X0[2,0])],[X0[4,0]],[X0[1,0]],[X0[3,0]],[X0[5,0]]])
+    [trajCoM2_3,vel2_3,ind_s2,ind_dbl2,X0] = trajetoria(X02_3)
+
+    a = 42000
+    b = 0
+    xd = 0.008
+    vd = 0.0
+    vf = X0[1,0]
+    xi3_3 = footPlacement(a,b,zod,vf,xd,vd)
+
+    posInicialPe = -passoComprimentoB - posInicialPe
+
+    passoComprimentoA = -posInicialPe + X0[0,0] +xi3_3  #- 0.01256
+
+    tamTrajPa2_3 = np.array([ind_s2,ind_dbl2])
+    trajPA2_3 = trajetoriaPes(np.array([[posInicialPe],[-passoLargura],[0]]),
+    passoComprimentoA,passoAltura,altura_y,-passoLargura,0,tamTrajPa2_3)
+
+    [ha,ha2,theta] = fase2(ha,ha2,trajCoM2_3,np.size(trajPA2_3,0),
+    trajPA2_3,theta,vecGanho2,pub_theta)  
+    # ##########################################################
+    # #Passo 3_3
+    X03_3 = np.array([[-xi3_3],[passoLargura+X0[2,0]],[X0[4,0]],[X0[1,0]],[X0[3,0]],[X0[5,0]]])
+    [trajCoM3_3,vel3_3,ind_s3,ind_dbl3,X0] = trajetoria(X03_3)
+    # a = 200
+    # b = 0
+    # xd = 0.013
+    # vd = 0.0
+    # vf = X0[1,0]
+    # [xi2_4,d2_1] = footPlacement(a,b,zod,vf,xd,vd)
+    xi2_4 = 0.0
+    posInicialPe = -passoComprimentoA-posInicialPe
+    passoComprimentoB = -posInicialPe + X0[0,0] +xi2_4
+
+    tamTrajPb3 = np.array([ind_s3,ind_dbl3])
+    trajPB3 = trajetoriaPes(np.array([[posInicialPe],[passoLargura],[0]]),
+    passoComprimentoB,passoAltura,-altura_y,passoLargura,0,tamTrajPb3)
+    [ha,ha2,theta] = fase3(ha,ha2,trajCoM3_3,np.size(trajPB3,0),trajPB3,
+    theta,vecGanho1,pub_theta)
     return
 
     # #############from turtle import pos, position

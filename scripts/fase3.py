@@ -9,13 +9,13 @@ from dualQuatMult import dualQuatMult
 from jacobianoCoM import jacobiano2
 from jacobianoPes import jacobianoPes
 from kinematicModel import KinematicModel
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Int16MultiArray
 #---------------------------------------------
 #Método para executar o  passo com a perna direita como suporte da 
 #caminhada e a perna esquerda em movimento
 #---------------------------------------------
 def fase3(ha,ha2,trajCoM,ind,trajPB,theta,vecGanho,pub):
-    angles = Float64MultiArray()    
+    angles = Int16MultiArray()    
     
     #global hpi, L1, L2, L3, L4, L5, height, MDH, hEdo
     glob = GlobalVariables()
@@ -234,7 +234,13 @@ def fase3(ha,ha2,trajCoM,ind,trajPB,theta,vecGanho,pub):
         od2  = (do2*dt)/2
         theta[:,1] = theta[:,1] + od2[:,0] 
 
-        angles.data = np.concatenate((theta[:,0],theta[:,1])).tolist()
+        t1 = theta[:,0]*1800/np.pi
+        t2 = theta[:,1]*1800/np.pi
+        t1 = t1.astype('int16').tolist()
+        t2 = t2.astype('int16').tolist()
+
+        inc = t1+t2+[0,0,0,0,0,0]
+        angles.data = inc
         pub.publish(angles)
 
         ha2 = kinematicRobo(theta,hOrg,hP,1,0)

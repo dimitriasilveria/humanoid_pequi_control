@@ -24,11 +24,11 @@ from jacobianoPes import jacobianoPes
 import time
 import pandas as pd 
 import rospy
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Int16MultiArray
 
 
 def fase1(trajCoM1,ind,trajPB1,theta,vecGanho,pub):
-    angles = Float64MultiArray()
+    angles = Int16MultiArray()
 
     global p,r 
 
@@ -226,8 +226,15 @@ def fase1(trajCoM1,ind,trajPB1,theta,vecGanho,pub):
         # do2 = Np2@(K2@e2 + Kd@(e2 - e_previous) + Ki@integral - vec2)
         do2 = Np2@(K2@e2-vec2)
         od2  = (do2*dt)/2  
+        theta[:,1] = theta[:,1] + od2[:,0] 
 
-        angles.data = np.concatenate((theta[:,0],theta[:,1])).tolist()
+        t1 = theta[:,0]*1800/np.pi
+        t2 = theta[:,1]*1800/np.pi
+        t1 = t1.astype('int16').tolist()
+        t2 = t2.astype('int16').tolist()
+
+        inc = t1+t2+[0,0,0,0,0,0]
+        angles.data = inc
         pub.publish(angles)
         # for j in range(0,6,1):
         #     if abs(theta[j,1]) > hpi:

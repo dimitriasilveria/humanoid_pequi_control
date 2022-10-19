@@ -3,7 +3,7 @@ import numpy as np
 #Calcular a trajetória dos pés
 #Função de Bézier de 4ª ordem
 #---------------------------------------
-def trajetoriaPesInicio(posP,passo,altura,largura,tam):
+def trajetoriaPesInicio(posP,passo,altura,altura_y,largura,tam):
     
     p0 = np.array([[posP[0,0]],[posP[2,0]]]) 
     p1 = np.array([[passo/2],[altura]])
@@ -20,7 +20,7 @@ def trajetoriaPesInicio(posP,passo,altura,largura,tam):
     for i in range(0,ind,1):
         B[i,0] = (1 - t[0,i])**2 * p0[0,0] + 2*t[0,i]*(1 - t[0,i])*p1[0,0] + t[0,i]*t[0,i]*p2[0,0]
         B[i,2] = (1 - t[0,i])**2 * p0[1,0] + 2*t[0,i]*(1 - t[0,i])*p1[1,0] + t[0,i]*t[0,i]*p2[1,0]
-        B[i,1] = ((largura-posP[1,0])/(t[0,ind-1]-t[0,0]))*(t[0,i]) + posP[1,0]
+        B[i,1] =  altura_y*np.sin(np.pi*t[0,i]) + largura
     
 
         

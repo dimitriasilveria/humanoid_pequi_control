@@ -11,11 +11,11 @@ class GlobalVariables:
     # L4 = 0.3
     # L5 = 0.0663
     # #Darwin's parameters
-    L1 = 0.0350000000000
-    L2 = 0.0285000000000
-    L3 = 0.1101500000000
-    L4 = 0.1100000000000
-    L5 = 0.0000000000000
+    L1 = 0.065
+    L2 = 0.053
+    L3 = 0.1003
+    L4 = 0.100
+    L5 = 0.0421
 
     #HRP's parameters
     # L1 = 0.035
@@ -45,8 +45,8 @@ class GlobalVariables:
 
     # ori = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0]).reshape((6,1)) #perna direita
     # ol = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0]).reshape((6,1)) #perna esquerda
-    ori = np.array([0.0, 0.0, -0.6165, 2*0.6165, -0.6165, 0.0]).reshape((6,1)) #perna direita
-    ol  = np.array([0.0, 0.0, -0.6165, 2*0.6165, -0.6165, 0.0]).reshape((6,1)) #perna esquerda 
+    ori = np.array([0.0,0.0,-0.686966,1.3732868,-0.6863206,0.0]).reshape((6,1)) #perna direita
+    ol  = np.array([0.0,0.0,-0.686966,1.3732868,-0.6863206,0.0]).reshape((6,1)) #perna esquerda  
     # ol = np.array([0.34761034,-0.43843274,0.3868615 ,-0.46848793,0.78814092,0.55240586]).reshape((6,1)) #perna direita
     # ori = np.array([-0.03602698,0.04953561,-0.51070792,1.02498516,0.11493388,-0.06124262]).reshape((6,1)) #perna esquerda
     MDH = np.zeros((6,4))

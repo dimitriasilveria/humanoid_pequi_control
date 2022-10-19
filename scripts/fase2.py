@@ -11,13 +11,13 @@ from jacobianoCoM import jacobiano2
 from jacobianoPes import jacobianoPes
 from kinematicModel import KinematicModel
 import pandas as pd
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Int16MultiArray
 #-----------------------------------
 #Método para executar o  passo com a perna esquerda como suporte da 
 #caminhada e a perna direita em movimento
 #-----------------------------------
 def fase2(ha,ha2,trajCoM,ind,trajPA,theta,vecGanho,pub):
-    angles = Float64MultiArray()
+    angles = Int16MultiArray()
     # print('aqui começa a fase2')
     glob = GlobalVariables()
     hEdo = glob.getHEDO()
@@ -218,7 +218,13 @@ def fase2(ha,ha2,trajCoM,ind,trajPA,theta,vecGanho,pub):
         #for j in range(6):
         theta[:,0] = theta[:,0] + od2[:,0]
 
-        angles.data = np.concatenate((theta[:,0],theta[:,1])).tolist()
+        t1 = theta[:,0]*1800/np.pi
+        t2 = theta[:,1]*1800/np.pi
+        t1 = t1.astype('int16').tolist()
+        t2 = t2.astype('int16').tolist()
+
+        inc = t1+t2+[0,0,0,0,0,0]
+        angles.data = inc
         pub.publish(angles)
         # if np.sign(theta[3,0])>0:
         #     theta[3,0] = -theta[3,0]
